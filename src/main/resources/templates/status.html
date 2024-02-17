@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>Bajas</title>
+</head>
+<body>
+    
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #23A4D0;" >
+        <a class="navbar-brand" href="#">
+            <img src="/images/logo.png" width="100" height="60" alt="Logo">
+        </a>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link text-white" href="/medicamentos">Ingresos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" th:href="@{/medicamentos/buscar}">Búsquedas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" th:href="@{/medicamentos/bajas}">Bajas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" th:href="@{/medicamentos/usuarios}">Gestion Usuarios</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="navbar-text text-white">
+            <a class="nav-link text-white" th:href="@{/login}">Cerrar Sesion</a>
+        </div>
+    </nav>
+
+<div class="container mt-4">
+    <h2>Barra de Búsqueda</h2>
+
+    <form th:action="@{/medicamentos/restatus}" method="post">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="campoBusqueda">Campo de Búsqueda:</label>
+                <select class="form-control" id="campoBusqueda" name="campoBusqueda">
+                    <option value="farmaco">Farmaco</option>
+                    <option value="princAct">Principio Activo</option>
+                    <option value="cadu">Caducidad</option>
+                    <option value="prese">Presentacion</option>
+                    <option value="concen">Concentracion</option>
+                    <option value="lab">Laboratorio</option>
+                    <option value="estatus">Estatus</option>
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="terminoBusqueda">Término de Búsqueda:</label>
+                <input type="text" class="form-control" id="terminoBusqueda" name="terminoBusqueda" placeholder="Ingrese término de búsqueda">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
+    
+    <table class="table table-hover mt-4">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Farmaco</th>
+                <th>Principio Activo</th>
+                <th>Caducidad</th>
+                <th>Presentación</th>
+                <th>Concentración</th>
+                <th>Laboratorio</th>
+                <th>Estatus</th>
+                <th>Modificar</th>
+            </tr>
+        </thead>
+        <tbody>
+    <tr th:each="medicamento : ${medicamentos}">
+        <td th:text="${medicamento.id}"></td>
+        <td th:text="${medicamento.farmaco}"></td>
+        <td th:text="${medicamento.princAct}"></td>
+        <td th:text="${medicamento.cadu}"></td>
+        <td th:text="${medicamento.prese}"></td>
+        <td th:text="${medicamento.concen}"></td>
+        <td th:text="${medicamento.lab}"></td>
+        <td th:text="${medicamento.estatus}"></td>
+        <td>
+            <a th:href="@{'/medicamentos/cambiarEstatus/' + ${medicamento.id}}"
+                       class="btn btn-success">Estatus</a>
+            <a th:href="@{'/medicamentos/eliminar/' + ${medicamento.id}}"
+                       class="btn btn-danger btn-sm" onclick="return confirm('Esta Seguro de dar de baja el medicamento?');">Eliminar</a>
+        </td>
+    </tr>
+    </tbody>
+    </table>
+</div>
+
+    <footer class="bg-dark text-white text-center py-3">
+        <p>&copy; 2024 Farmavet | Todos los derechos reservados</p>
+        <p><a href="/politica-de-privacidad" class="text-white">Política de Privacidad</a> | <a href="/terminos-y-condiciones" class="text-white">Términos y Condiciones</a></p>
+    </footer>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</body>
+</html>

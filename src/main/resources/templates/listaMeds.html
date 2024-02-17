@@ -1,0 +1,147 @@
+<!DOCTYPE HTML>
+<html lang="en-ES" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Medicamentos</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #23A4D0;" >
+        <a class="navbar-brand" href="#">
+            <img src="/images/logo.png" width="100" height="60" alt="Logo">
+        </a>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link text-white" href="/medicamentos">Ingresos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" th:href="@{/medicamentos/buscar}">Búsquedas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" th:href="@{/medicamentos/bajas}">Bajas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" th:href="@{/medicamentos/usuarios}">Gestion Usuarios</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="navbar-text text-white">
+            <a class="nav-link text-white" th:href="@{/login}">Cerrar Sesion</a>
+        </div>
+    </nav>
+    
+    <div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje != null}" th:text="${mensaje}" class="alert">
+            <p th:text="${mensaje}"></p>
+    </div>
+    
+    <div class="container mt-4">
+        <h1>Ingreso de Medicamentos</h1>
+
+        <!-- Formulario con Thymeleaf y Bootstrap -->
+        <form th:action="@{/medicamentos/guardar}" th:object="${medicamento}" method="post">
+            <div class="form-group">
+                <label for="id">ID</label>
+                <input  type="number" class="form-control" th:field="*{id}">
+                <div id="emailHelp" class="form-text">Id debe ser numero</div>
+            </div>
+            <div class="form-group">
+                <label for="farmaco">Farmaco:</label>
+                <input type="text" class="form-control" th:field="*{farmaco}">
+            </div>
+            <div class="form-group">
+                <label for="princAct">Principio Activo</label>
+                <input type="text" class="form-control"  th:field="*{princAct}">
+            </div>
+            <div class="form-group">
+                <label for="cadu">Caducidad:</label>
+                <input type="text" class="form-control" th:field="*{cadu}">
+            </div>
+            <div class="form-group">
+                <label for="prese">Presentación:</label>
+                <input type="text" class="form-control" th:field="*{prese}">
+            </div>
+            <div class="form-group">
+                <label for="concen">Concentración:</label>
+                <input type="text" class="form-control" th:field="*{concen}">
+            </div>
+            <div class="form-group">
+                <label for="lab">Laboratorio:</label>
+                <input type="text" class="form-control" th:field="*{lab}">
+            </div>
+            <div class="form-group">
+                <label for="estatus">Estatus:</label>
+                <input type="text" class="form-control" th:field="*{estatus}">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            
+            <div th:if="${#fields.hasErrors('id') or #fields.hasErrors('cadu') or #fields.hasErrors('estatus')}" class="alert alert-danger">
+                <p>Error en el formulario:</p>
+                <ul>
+                    <li th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></li>
+                    <li th:if="${#fields.hasErrors('cadu')}" th:errors="*{cadu}"></li>
+                    <li th:if="${#fields.hasErrors('estatus')}" th:errors="*{estatus}"></li>
+                </ul>
+            </div>
+            
+        </form>
+        
+        
+    </div>
+    
+    <div class="container mt-4">
+    <h1>Medicamentos Almacenados</h1>
+    
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Farmaco</th>
+                <th>Principio Activo</th>
+                <th>Caducidad</th>
+                <th>Presentacion</th>
+                <th>Concentracion</th>
+                <th>Laboratorio</th>
+                <th>Estatus</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="medicamentos : ${medicamentos}">
+                <td th:text="${medicamentos.id}"></td>
+                <td th:text="${medicamentos.farmaco}"></td>
+                <td th:text="${medicamentos.princAct}"></td>
+                <td th:text="${medicamentos.cadu}"></td>
+                <td th:text="${medicamentos.prese}"></td>
+                <td th:text="${medicamentos.concen}"></td>
+                <td th:text="${medicamentos.lab}"></td>
+                <td th:text="${medicamentos.estatus}"></td>
+                <td>
+                    <!-- Botón de Actualizar -->
+                    <a th:href="@{'/medicamentos/update/' + ${medicamentos.id}}"
+                       class="btn btn-info btn-sm">Actualizar</a>
+                    <!-- Botón de Eliminar -->
+                    <a th:href="@{'/medicamentos/eliminar/' + ${medicamentos.id}}"
+                       class="btn btn-danger btn-sm" onclick="return confirm('Esta Seguro de eliminar el medicamento?');">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+    
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <footer class="bg-dark text-white text-center py-3">
+        <p>&copy; 2024 Farmavet | Todos los derechos reservados</p>
+        <p><a href="/politica-de-privacidad" class="text-white">Política de Privacidad</a> | <a href="/terminos-y-condiciones" class="text-white">Términos y Condiciones</a></p>
+    </footer>
+
+</body>
+</html>

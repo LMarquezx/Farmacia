@@ -1,0 +1,11 @@
+{
+    "elements": {},
+    "attributes": {
+        "th:each": {
+            "context": "tr"
+        },
+        "th:fragment": {
+            "context": "head"
+        }
+    }
+}

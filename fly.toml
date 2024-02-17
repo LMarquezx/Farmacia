@@ -1,0 +1,14 @@
+# fly.toml
+
+app = "farmavet"
+
+[build]
+image = "gcr.io/paketo-buildpacks/builder:base"
+
+[[services]]
+internal_port = 8080
+protocol = "tcp"
+
+[env]
+SPRING_PROFILES_ACTIVE = "produccion"
+MONGODB_URI = "mongodb://isc20350669:12345@cluster0.i4lrt50.mongodb.net/Farmacia"
