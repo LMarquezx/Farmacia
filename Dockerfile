@@ -1,5 +1,5 @@
 # Etapa de construcción
-FROM openjdk:17-jdk as build
+FROM openjdk:21-jdk as build
 WORKDIR /app
 COPY . /app
 RUN ./mvnw package
