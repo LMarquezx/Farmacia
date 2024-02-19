@@ -5,7 +5,7 @@ COPY . /app
 RUN ./mvnw package
 
 # Etapa de ejecución
-FROM openjdk:17-jdk
+FROM openjdk:21-jdk
 LABEL authors="laclavees12345"
 LABEL maintainer="Luis Angel Orduna Marquez <isc20350669@gmail.com>"
 LABEL version="1.0"
