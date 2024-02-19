@@ -14,12 +14,12 @@ public class LoginController {
     @Autowired
     private UsrRepository usrRepository;
 
-    @GetMapping("/login")
+    @GetMapping("/index")
     public String showLoginForm(Model model) {
-        return "Login";
+        return "index";
     }
 
-    @PostMapping("/login")
+    @PostMapping("/index")
     public String login(@RequestParam String email, @RequestParam String pass, Model model) {
         usuarios usuario = usrRepository.findByEmail(email);
 
@@ -34,7 +34,7 @@ public class LoginController {
         } else {
             // Autenticación fallida, mostrar mensaje de error
             model.addAttribute("error", "Credenciales incorrectas");
-            return "login";
+            return "index";
         }
     }
 }
