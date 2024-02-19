@@ -1,7 +1,7 @@
 # Etapa de construcción
-FROM openjdk:17-jdk
+FROM openjdk:17-jdk as build
 WORKDIR /app
-COPY target/Farmacia-0.0.1-SNAPSHOT.jar app.jar
+COPY . /app
 RUN ./mvnw package
 
 # Etapa de ejecución
