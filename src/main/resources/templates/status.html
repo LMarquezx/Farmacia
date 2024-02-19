@@ -8,33 +8,37 @@
 </head>
 <body>
     
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #23A4D0;" >
-        <a class="navbar-brand" href="#">
-            <img src="/images/logo.png" width="100" height="60" alt="Logo">
-        </a>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #23A4D0;">
+    <a class="navbar-brand" href="#">
+        <img src="/images/logo.png" width="100" height="60" alt="Logo">
+    </a>
 
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link text-white" href="/medicamentos">Ingresos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" th:href="@{/medicamentos/buscar}">Búsquedas</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" th:href="@{/medicamentos/bajas}">Bajas</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" th:href="@{/medicamentos/usuarios}">Gestion Usuarios</a>
-                </li>
-            </ul>
-        </div>
+    <!-- Botón de hamburguesa para dispositivos pequeños -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link text-white" href="/medicamentos">Ingresos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" th:href="@{/medicamentos/buscar}">Búsquedas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" th:href="@{/medicamentos/bajas}">Bajas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" th:href="@{/medicamentos/usuarios}">Gestión Usuarios</a>
+            </li>
+        </ul>
+    </div>
 
         <div class="navbar-text text-white">
             <a class="nav-link text-white" th:href="@{/index}">Cerrar Sesion</a>
         </div>
     </nav>
-
 <div class="container mt-4">
     <h2>Barra de Búsqueda</h2>
 
