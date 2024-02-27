@@ -206,6 +206,9 @@ public class MedController {
         List<medicamentos> resultadosBusqueda;
 
         switch (campoBusqueda) {
+            case "id":
+                resultadosBusqueda = medRepository.findByIdContainingIgnoreCase(terminoBusqueda);
+                break;
             case "farmaco":
                 resultadosBusqueda = medRepository.findByFarmacoContainingIgnoreCase(terminoBusqueda);
                 break;
