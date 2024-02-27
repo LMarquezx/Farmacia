@@ -208,8 +208,7 @@ public class MedController {
         switch (campoBusqueda) {
             case "id":
                 int idterminoBusqueda = Integer.parseInt(terminoBusqueda);
-                Optional<medicamentos> medicamentoOptional = medRepository.findById(idterminoBusqueda);
-                resultadosBusqueda = medicamentoOptional.isPresent() ? Arrays.asList(medicamentoOptional.get()) : new ArrayList<>();
+                resultadosBusqueda = medRepository.findByIdContainingIgnoreCase(idterminoBusqueda);
             break;
             case "farmaco":
                 resultadosBusqueda = medRepository.findByFarmacoContainingIgnoreCase(terminoBusqueda);
@@ -460,8 +459,7 @@ public String buscarMedStatusU(@RequestParam("campoBusqueda") String campoBusque
     switch (campoBusqueda) {
         case "id":
             int idterminoBusqueda = Integer.parseInt(terminoBusqueda);
-            Optional<medicamentos> medicamentoOptional = medRepository.findById(idterminoBusqueda);
-            resultadosBusqueda = medicamentoOptional.isPresent() ? Arrays.asList(medicamentoOptional.get()) : new ArrayList<>();
+            resultadosBusqueda = medRepository.findByIdContainingIgnoreCase(idterminoBusqueda);
             break;
         case "farmaco":
             resultadosBusqueda = medRepository.findByFarmacoContainingIgnoreCase(terminoBusqueda);
