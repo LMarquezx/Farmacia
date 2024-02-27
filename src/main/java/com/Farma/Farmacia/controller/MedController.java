@@ -4,7 +4,7 @@ package com.Farma.Farmacia.controller;
 import com.Farma.Farmacia.docs.medicamentos;
 import com.Farma.Farmacia.docs.usuarios;
 import com.Farma.Farmacia.repository.MedRepository;
-
+import java.util.stream.Collectors;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
