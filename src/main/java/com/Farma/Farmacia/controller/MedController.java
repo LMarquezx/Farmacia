@@ -458,7 +458,7 @@ public String buscarMedStatusU(@RequestParam("campoBusqueda") String campoBusque
     switch (campoBusqueda) {
         case "id":
             int idterminoBusqueda = Integer.parseInt(terminoBusqueda);
-            resultadosBusqueda = medRepository.findByIdContainingIgnoreCase(idterminoBusqueda);
+            resultadosBusqueda = medRepository.findById(idterminoBusqueda);
             break;
         case "farmaco":
             resultadosBusqueda = medRepository.findByFarmacoContainingIgnoreCase(terminoBusqueda);
