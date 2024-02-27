@@ -207,7 +207,7 @@ public class MedController {
         switch (campoBusqueda) {
             case "id":
                 int idterminoBusqueda = Integer.parseInt(terminoBusqueda);
-                resultadosBusqueda = medRepository.findById(idterminoBusqueda);
+                resultadosBusqueda = medRepository.findByIdAsList(idterminoBusqueda);
             break;
             case "farmaco":
                 resultadosBusqueda = medRepository.findByFarmacoContainingIgnoreCase(terminoBusqueda);
@@ -458,7 +458,7 @@ public String buscarMedStatusU(@RequestParam("campoBusqueda") String campoBusque
     switch (campoBusqueda) {
         case "id":
             int idterminoBusqueda = Integer.parseInt(terminoBusqueda);
-            resultadosBusqueda = medRepository.findById(idterminoBusqueda);
+            resultadosBusqueda = medRepository.findByIdAsList(idterminoBusqueda);
             break;
         case "farmaco":
             resultadosBusqueda = medRepository.findByFarmacoContainingIgnoreCase(terminoBusqueda);
