@@ -15,7 +15,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  */
 public interface MedRepository extends MongoRepository<medicamentos,Integer>{
     
-    List<medicamentos> findByIdAsList(int terminoBusqueda);
+    List<medicamentos> findListById(int terminoBusqueda);
     List<medicamentos> findByFarmacoContainingIgnoreCase(String terminoBusqueda);
     List<medicamentos> findByPrincActContainingIgnoreCase(String terminoBusqueda);
     List<medicamentos> findByCaduContainingIgnoreCase(String terminoBusqueda);
