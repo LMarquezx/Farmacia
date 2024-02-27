@@ -204,11 +204,12 @@ public class MedController {
                                      @RequestParam("terminoBusqueda") String terminoBusqueda,
                                      Model model) {
         List<medicamentos> resultadosBusqueda;
-
+        printf(terminoBusqueda);
         switch (campoBusqueda) {
             case "id":
                 int idterminoBusqueda = Integer.parseInt(terminoBusqueda);
                 resultadosBusqueda = medRepository.findByIdContainingIgnoreCase(idterminoBusqueda);
+                printf(resultadoBusqueda);
             break;
             case "farmaco":
                 resultadosBusqueda = medRepository.findByFarmacoContainingIgnoreCase(terminoBusqueda);
