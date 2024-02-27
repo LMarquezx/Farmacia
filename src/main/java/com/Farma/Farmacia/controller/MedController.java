@@ -158,38 +158,84 @@ public class MedController {
 
     @PostMapping("medicamentos/rbusqueda")
     public String buscarMedicamentos(@RequestParam("campoBusqueda") String campoBusqueda,
-                                  @RequestParam("terminoBusqueda") String terminoBusqueda,
-                                  Model model) {
-    List<medicamentos> resultadosBusqueda;
+                                     @RequestParam("terminoBusqueda") String terminoBusqueda,
+                                      @RequestParam("campoBusqueda2") String campoBusqueda2,
+                                      @RequestParam("terminoBusqueda2") String terminoBusqueda2,
+                                     Model model) {
+        List<medicamentos> resultadosBusqueda;
+        switch (campoBusqueda) {
+            case "id":
+                int idterminoBusqueda = Integer.parseInt(terminoBusqueda);
+                resultadosBusqueda = medRepository.findListById(idterminoBusqueda);
+            break;
+            case "farmaco":
+                resultadosBusqueda = medRepository.findByFarmacoContainingIgnoreCase(terminoBusqueda);
+                break;
+            case "princAct":
+                resultadosBusqueda = medRepository.findByPrincActContainingIgnoreCase(terminoBusqueda);
+                break;
+            case "cadu":
+                resultadosBusqueda = medRepository.findByCaduContainingIgnoreCase(terminoBusqueda);
+                break;
+            case "prese":
+                resultadosBusqueda = medRepository.findByPreseContainingIgnoreCase(terminoBusqueda);
+                break;
+            case "concen":
+                resultadosBusqueda = medRepository.findByConcenContainingIgnoreCase(terminoBusqueda);
+                break;
+            case "lab":
+                resultadosBusqueda = medRepository.findByLabContainingIgnoreCase(terminoBusqueda);
+                break;
+            case "estatus":
+                resultadosBusqueda = medRepository.findByEstatusContainingIgnoreCase(terminoBusqueda);
+                break;
+            default:
+                resultadosBusqueda = new ArrayList<>();
+        }
+        switch (campoBusqueda2) {
+            case "farmaco":
+                    resultadosBusqueda = resultadosBusqueda.stream()
+                        .filter(med -> med.getFarmaco().contains(terminoBusqueda2))
+                        .collect(Collectors.toList());
+            break;
+            case "princAct":
+                    resultadosBusqueda = resultadosBusqueda.stream()
+                        .filter(med -> med.getPrincAct().contains(terminoBusqueda2))
+                        .collect(Collectors.toList());
+                break;
+            case "cadu":
+                resultadosBusqueda = resultadosBusqueda.stream()
+                        .filter(med -> med.getCadu().contains(terminoBusqueda2))
+                        .collect(Collectors.toList());
+                break;
+            case "prese":
+                resultadosBusqueda = resultadosBusqueda.stream()
+                        .filter(med -> med.getPrese().contains(terminoBusqueda2))
+                        .collect(Collectors.toList());
+                break;
+            case "concen":
+                resultadosBusqueda = resultadosBusqueda.stream()
+                        .filter(med -> med.getConcen().contains(terminoBusqueda2))
+                        .collect(Collectors.toList());
+                break;
+            case "lab":
+                resultadosBusqueda = resultadosBusqueda.stream()
+                        .filter(med -> med.getLab().contains(terminoBusqueda2))
+                        .collect(Collectors.toList());
+                break;
+            case "estatus":
+                resultadosBusqueda = resultadosBusqueda.stream()
+                        .filter(med -> med.getEstatus().contains(terminoBusqueda2))
+                        .collect(Collectors.toList());
+                break;
 
-    switch (campoBusqueda) {
-        case "farmaco":
-            resultadosBusqueda = medRepository.findByFarmacoContainingIgnoreCase(terminoBusqueda);
-            break;
-        case "princAct":
-            resultadosBusqueda = medRepository.findByPrincActContainingIgnoreCase(terminoBusqueda);
-            break;
-        case "cadu":
-            resultadosBusqueda = medRepository.findByCaduContainingIgnoreCase(terminoBusqueda);
-            break;
-        case "prese":
-            resultadosBusqueda = medRepository.findByPreseContainingIgnoreCase(terminoBusqueda);
-            break;
-        case "concen":
-            resultadosBusqueda = medRepository.findByConcenContainingIgnoreCase(terminoBusqueda);
-            break;
-        case "lab":
-            resultadosBusqueda = medRepository.findByLabContainingIgnoreCase(terminoBusqueda);
-            break;
-        case "estatus":
-            resultadosBusqueda = medRepository.findByEstatusContainingIgnoreCase(terminoBusqueda);
-            break;
         default:
-            resultadosBusqueda = new ArrayList<>(); 
+            // No es necesario filtrar por el segundo criterio si no se proporciona
+            break;
     }
 
-    model.addAttribute("medicamentos", resultadosBusqueda);
-    return "search";
+        model.addAttribute("medicamentos", resultadosBusqueda);
+        return "search";
 }
 
     @GetMapping("/medicamentosU/buscarU")
