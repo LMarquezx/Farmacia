@@ -208,8 +208,9 @@ public class MedController {
         switch (campoBusqueda) {
             case "id":
                 int idterminoBusqueda = Integer.parseInt(terminoBusqueda);
-                resultadosBusqueda = medRepository.findById(idterminoBusqueda);
-                break;
+                Optional<medicamentos> medicamentoOptional = medRepository.findById(idterminoBusqueda);
+                resultadosBusqueda = medicamentoOptional.isPresent() ? Arrays.asList(medicamentoOptional.get()) : new ArrayList<>();
+            break;
             case "farmaco":
                 resultadosBusqueda = medRepository.findByFarmacoContainingIgnoreCase(terminoBusqueda);
                 break;
