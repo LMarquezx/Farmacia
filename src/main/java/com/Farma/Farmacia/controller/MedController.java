@@ -164,8 +164,7 @@ public class MedController {
 
     switch (campoBusqueda) {
         case "farmaco":
-            int idterminoBusqueda = Integer.parseInt(terminoBusqueda);
-            resultadosBusqueda = medRepository.findByFarmacoContainingIgnoreCase(idterminoBusqueda);
+            resultadosBusqueda = medRepository.findByFarmacoContainingIgnoreCase(terminoBusqueda);
             break;
         case "princAct":
             resultadosBusqueda = medRepository.findByPrincActContainingIgnoreCase(terminoBusqueda);
@@ -208,7 +207,8 @@ public class MedController {
 
         switch (campoBusqueda) {
             case "id":
-                resultadosBusqueda = medRepository.findByIdContainingIgnoreCase(terminoBusqueda);
+                int idterminoBusqueda = Integer.parseInt(terminoBusqueda);
+                resultadosBusqueda = medRepository.findByIdContainingIgnoreCase(idterminoBusqueda);
                 break;
             case "farmaco":
                 resultadosBusqueda = medRepository.findByFarmacoContainingIgnoreCase(terminoBusqueda);
